@@ -36,6 +36,11 @@ int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    int t;
-    cout << (cin>>t,t);
+    tuple<ll,ll,ll> t;
+    pair<pair<ll, ll>, int> curr;
+    curr = {{1,2},3};
+    t = {1,2,3};
+    // cout << (cin>>t,t);
+    // cin>>
+    cout<<get<1>(t);
 }
