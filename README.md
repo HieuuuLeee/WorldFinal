@@ -37,4 +37,10 @@ typedef uint64_t ull;
 #define rall(v)             (v).rbegin(), (v).rend()
 #define bit(x, i)           (((x) >> (i)) & 1)
 #define bitcount(n)         __builtin_popcountll(n)
+
+int main(){
+	CURTIME();
+    INFILE("in.txt");
+    OUFILE("out.txt");
+}
 ```

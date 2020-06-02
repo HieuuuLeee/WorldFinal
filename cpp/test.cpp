@@ -1,6 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define fi first
+#define se second
+#define pb push_back
+#define pp push
+#define et empty
+#define mp make_pair
+
 #ifdef ONLINE_JUDGE
 #define CURTIME()         ;
 #define INFILE(name)      ;
@@ -10,7 +17,7 @@ using namespace std;
 #else
 #define CURTIME()         cerr << el << "[TIME]: " << clock() * 1.0 / CLOCKS_PER_SEC << "s" << el
 #define INFILE(name)      freopen(name, "r", stdin)
-#define OUFILE(name)      freopen(name, "w", stdin)
+#define OUFILE(name)      freopen(name, "w", stdout)
 #define DEBUG             cerr << "##########\nRunning on Line: " << __LINE__ << "\nIn Function: " <<   __FUNCTION__ << "\n##########\n"
 #define DUMP(value)       cerr << "[" << (#value) << "]: " << (value) << el
 #endif
@@ -26,18 +33,9 @@ typedef uint64_t ull;
 #define bitcount(n)         __builtin_popcountll(n)
 
 int main(){
-    freopen("in.txt","r",stdin);
-    // freopen("out.txt","w",stdout);
-    if( stream == NULL )
-        fprintf( stdout, "error on freopen\n" );
-    else
-    {
-        fprintf( stdout, "successfully reassigned\n" ); fflush( stdout );
-        fprintf( stream, "This will go to the file 'freopen.out'\n" );
-        fclose( stream );
-    }
-    int a;
-    // cin >> a;
-    cout << a;
-    cout << "hh";
+    CURTIME();
+    INFILE("in.txt");
+    OUFILE("out.txt");
+    int t;
+    cout << (cin>>t,t);
 }
