@@ -1,10 +1,10 @@
 # WorldFinal
 ## Copyright belong to IUH.AydaaaaComeback&WorldFinal ACM/ICPC Team
 ## TEMPLATE:
-|------------------------------------------------|
-#### | \#include<bits/stdc++.h> |
-#### | using namespace std; |
-|------------------------------------------------|
+
+| **#include<bits/stdc++.h>** |
+| **using namespace std;** |
+
 #### \#ifdef ONLINE_JUDGE
 ##### > \#define CURTIME()         ;
 ##### > \#define INFILE(name)      ;
