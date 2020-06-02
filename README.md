@@ -6,6 +6,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+#define fi first
+#define se second
+#define pb push_back
+#define pp push
+#define et empty
+#define mp make_pair
+
 #ifdef ONLINE_JUDGE
 #define CURTIME()         ;
 #define INFILE(name)      ;
