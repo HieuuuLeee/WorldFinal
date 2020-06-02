@@ -2,7 +2,7 @@
 ## Copyright belong to IUH.AydaaaaComeback&WorldFinal ACM/ICPC Team
 ## TEMPLATE:
 
-'''sh
+```sh
 #### \#include<bits/stdc++.h>
 #### using namespace std;
 
@@ -29,4 +29,4 @@
 ##### \#define rall(v)             (v).rbegin(), (v).rend()
 ##### \#define bit(x, i)           (((x) >> (i)) & 1)
 ##### \#define bitcount(n)         __builtin_popcountll(n)
-'''sh
+```
