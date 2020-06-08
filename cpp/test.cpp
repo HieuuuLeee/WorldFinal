@@ -36,11 +36,26 @@ int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    tuple<ll,ll,ll> t;
-    pair<pair<ll, ll>, int> curr;
-    curr = {{1,2},3};
-    t = {1,2,3};
-    // cout << (cin>>t,t);
-    // cin>>
-    cout<<get<1>(t);
+    int n; cin>>n;
+    int a[2*n],b[2*n+1];
+    For(i,0,n) cin>>a[i];
+    map<int, int> mm;
+    For(i,0,n) {cin>>b[i]; mm[b[i]]=i;}
+    
+    int check[n+1];
+    For(i,0,n) {
+        check[i] = mm[a[i]]-i;
+    }
+    // For(i,0,n) {
+    //      cout<<check[i]<<" ";
+    // }
+    // cout<<"\n";
+    map<int, int> m;
+    int res=0;
+    For(i,0,n){
+        m[check[i]]++;
+        m[check[i]-n]++;
+        res=max(res,m[check[i]]);
+    }
+    cout<<res;
 }
