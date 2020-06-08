@@ -38,6 +38,9 @@ using namespace std;
 
 typedef int64_t ll;
 typedef uint64_t ull;
+#define prno                             cout<<"NO\n"
+#define pryes                            cout<<"YES\n"
+#define pryon                            pryes; else prno;
 #define brln cout << "\n";
 #define el                  "\n"
 #define all(v)              (v).begin(), (v).end()

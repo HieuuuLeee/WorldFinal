@@ -28,61 +28,34 @@ using namespace std;
 #define ForV(v) for (auto it = v.begin(); it!=v.end(); ++it)
 typedef int64_t ll;
 typedef uint64_t ull;
+#define prno                             cout<<"NO\n"
+#define pryes                            cout<<"YES\n"
+#define pryon                            pryes; else prno;
 #define brln cout << "\n";
 #define el                  "\n"
 #define all(v)              (v).begin(), (v).end()
 #define rall(v)             (v).rbegin(), (v).rend()
 #define bit(x, i)           (((x) >> (i)) & 1)
 #define bitcount(n)         __builtin_popcountll(n)
-
-vector<int> up;
-ll po(int k){
-    ll res = 1;
-    For(i,0,k) res*=2;
-    return res;
-}
+ll tmp,t,n,a[555],b[555];
 int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    int n; cin>>n;
-    ll a[n+1];
-    For(i,0,n) cin>>a[i];
-    sort(a,a+n);
-    reverse(a,a+n);
-    // For(i,0,n) cout<<a[i]<<" "; cout<<"\n";
-    map<ll,int> check;
-    int ind=0;
-    
-    while(a[0]){
-        if(a[0]%2==0){
-            up.pb(ind);
+    cin>>t;
+    while(t--){
+        int poss=1; cin>>n;
+        For(i,0,n) cin>>a[i];
+        For(i,0,n) cin>>b[i];
+        if(n%2 && a[n/2]!=b[n/2]) poss = 0;
+        map<pair<ll,ll>,int> m;
+        For(i,0,n/2) {
+            m[mp(min(a[i],a[n-1-i]),max(a[i],a[n-1-i]))]++;
         }
-        a[0]/=2;
-        ind++;
-    }
-    ll res=0;
-    For(i,0,ind) res+=po(i);
-    check[a[0]]++;
-    map<int, int> rm;
-    ForV(up) rm[*it]=1;
-    // ForV(up) if(rm[*it]==1) cout<<*it<<" "; cout<<"\n";
-    For(i,1,n){
-        if(check[a[i]]) continue;
-        check[a[i]]=1;
-        int ind=0;
-        while(a[i]){
-            if(a[i]%2==0 && rm[ind]==0){
-                up.pb(ind);
-                rm[ind]=1;
-            }
-            if(a[i]%2==1) rm[ind]=-1;
-            a[i]/=2;
-            ind++;
+        For(i,0,n/2) {
+            if(m[mp(min(b[i],b[n-1-i]),max(b[i],b[n-1-i]))]<=0) poss=0;
+            m[mp(min(b[i],b[n-1-i]),max(b[i],b[n-1-i]))]--;
         }
+        if(poss) pryon;
     }
-    ForV(up) if(rm[*it]==1){
-        res-=po(*it);
-    }
-    cout<<res;
 }
