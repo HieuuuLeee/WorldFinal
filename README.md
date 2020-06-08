@@ -9,13 +9,13 @@ using namespace std;
 #define fi first
 #define se second
 #define pb push_back
+#define pf push_front
 #define pp push
 #define et empty
 #define mp make_pair
 #define count_array(a,b,n,indx) {int fiIndx=-1; for(int iiiii=0;iiiii<n;iiiii++) if(iiiii==n-1||(a[iiiii]!=a[iiiii+1])) {b[indx++]=iiiii-fiIndx; fiIndx=iiiii;}}
 #define prefix_arr(a,b,n) {b[0]=a[0]; for(int iiiii=1;iiiii<n,iiiii++) b[iiiii]=b[iiiii-1]+a[iiiii];}
 #define suffix_arr(a,b,n) {b[n-1]=a[n-1]; for(int iiiii=n-2;iiiii>=0,iiiii--) b[iiiii]=b[iiiii+1]+a[iiiii];}
-
 
 #ifdef ONLINE_JUDGE
 #define CURTIME()         ;
@@ -32,6 +32,10 @@ using namespace std;
 #endif
 #define For(i,a,b) for (int i=a;i<b;i++)
 #define Fod(i,b,a) for (int i=b;i>a;i--)
+#define Forl(i,a,b) for (ll i=a;i<b;i++)
+#define Fodl(i,b,a) for (ll i=b;i>a;i--)
+#define ForV(v) for (auto it = v.begin(); it!=v.end(); ++it)
+
 typedef int64_t ll;
 typedef uint64_t ull;
 #define brln cout << "\n";

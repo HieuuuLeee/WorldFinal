@@ -16,6 +16,7 @@ using namespace std;
 #endif
 #define For(i,a,b) for (int i=a;i<b;i++)
 #define Fod(i,b,a) for (int i=b;i>a;i--)
+
 typedef int64_t ll;
 typedef uint64_t ull;
 #define brln cout << "\n";

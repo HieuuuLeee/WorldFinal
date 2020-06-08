@@ -23,6 +23,9 @@ using namespace std;
 #endif
 #define For(i,a,b) for (int i=a;i<b;i++)
 #define Fod(i,b,a) for (int i=b;i>a;i--)
+#define Forl(i,a,b) for (ll i=a;i<b;i++)
+#define Fodl(i,b,a) for (ll i=b;i>a;i--)
+#define ForV(v) for (auto it = v.begin(); it!=v.end(); ++it)
 typedef int64_t ll;
 typedef uint64_t ull;
 #define brln cout << "\n";
@@ -32,30 +35,54 @@ typedef uint64_t ull;
 #define bit(x, i)           (((x) >> (i)) & 1)
 #define bitcount(n)         __builtin_popcountll(n)
 
+vector<int> up;
+ll po(int k){
+    ll res = 1;
+    For(i,0,k) res*=2;
+    return res;
+}
 int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
     int n; cin>>n;
-    int a[2*n],b[2*n+1];
+    ll a[n+1];
     For(i,0,n) cin>>a[i];
-    map<int, int> mm;
-    For(i,0,n) {cin>>b[i]; mm[b[i]]=i;}
+    sort(a,a+n);
+    reverse(a,a+n);
+    // For(i,0,n) cout<<a[i]<<" "; cout<<"\n";
+    map<ll,int> check;
+    int ind=0;
     
-    int check[n+1];
-    For(i,0,n) {
-        check[i] = mm[a[i]]-i;
+    while(a[0]){
+        if(a[0]%2==0){
+            up.pb(ind);
+        }
+        a[0]/=2;
+        ind++;
     }
-    // For(i,0,n) {
-    //      cout<<check[i]<<" ";
-    // }
-    // cout<<"\n";
-    map<int, int> m;
-    int res=0;
-    For(i,0,n){
-        m[check[i]]++;
-        m[check[i]-n]++;
-        res=max(res,m[check[i]]);
+    ll res=0;
+    For(i,0,ind) res+=po(i);
+    check[a[0]]++;
+    map<int, int> rm;
+    ForV(up) rm[*it]=1;
+    // ForV(up) if(rm[*it]==1) cout<<*it<<" "; cout<<"\n";
+    For(i,1,n){
+        if(check[a[i]]) continue;
+        check[a[i]]=1;
+        int ind=0;
+        while(a[i]){
+            if(a[i]%2==0 && rm[ind]==0){
+                up.pb(ind);
+                rm[ind]=1;
+            }
+            if(a[i]%2==1) rm[ind]=-1;
+            a[i]/=2;
+            ind++;
+        }
+    }
+    ForV(up) if(rm[*it]==1){
+        res-=po(*it);
     }
     cout<<res;
 }
