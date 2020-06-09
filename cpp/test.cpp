@@ -1,17 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+ 
 #define fi first
 #define se second
 #define pb push_back
-#define pf push_front
 #define pp push
 #define et empty
 #define mp make_pair
-#define count_array(a,b,n,indx) {int fiIndx=-1; for(int iiiii=0;iiiii<n;iiiii++) if(iiiii==n-1||(a[iiiii]!=a[iiiii+1])) {b[indx++]=iiiii-fiIndx; fiIndx=iiiii;}}
-#define prefix_arr(a,b,n) {b[0]=a[0]; for(int iiiii=1;iiiii<n,iiiii++) b[iiiii]=b[iiiii-1]+a[iiiii];}
-#define suffix_arr(a,b,n) {b[n-1]=a[n-1]; for(int iiiii=n-2;iiiii>=0,iiiii--) b[iiiii]=b[iiiii+1]+a[iiiii];}
-
+ 
 #ifdef ONLINE_JUDGE
 #define CURTIME()         ;
 #define INFILE(name)      ;
@@ -30,45 +26,54 @@ using namespace std;
 #define Forl(i,a,b) for (ll i=a;i<b;i++)
 #define Fodl(i,b,a) for (ll i=b;i>a;i--)
 #define ForV(v) for (auto it = v.begin(); it!=v.end(); ++it)
-
 typedef int64_t ll;
 typedef uint64_t ull;
-#define prno                             cout<<"NO\n"
-#define pryes                            cout<<"YES\n"
-#define pryon                            pryes; else prno;
 #define brln cout << "\n";
 #define el                  "\n"
 #define all(v)              (v).begin(), (v).end()
 #define rall(v)             (v).rbegin(), (v).rend()
 #define bit(x, i)           (((x) >> (i)) & 1)
 #define bitcount(n)         __builtin_popcountll(n)
+const int maxn=200007;
 
-int n,m,a[111111],u,v,res,visit[111111];
-vector<vector<int>> child;
+int n,k,ans=0;
+int cnt[maxn][26];
+string s;
 
-void travel(int cur, int check){
-    visit[cur]=1;
-    if(child[cur].size()==1&&visit[child[cur][0]]) {res++; return;}
-    if(!a[cur]) check=0;
-    ForV(child[cur]) if(!visit[*it] && check+a[*it]<=m) travel(*it, check+a[*it]);
+int differ(int u,int v){
+    int ret=0,mx=0;
+    for (int j=0;j<26;++j){
+        ret+=cnt[u][j]+cnt[v][j];
+        mx=max(mx,cnt[u][j]+cnt[v][j]);
+    }
+    // cout<<"ret:"<<ret<<" "<<"mx:"<<mx<<"\n";
+    return ret-mx;
 }
 
-int main() {
+int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    // DEBUG;
-    cin>>n>>m;
-    child.resize(n+1);
-    For(i,1,n+1) cin>>a[i];
-    For(i,0,n-1){
-        cin>>u>>v;
-        // DEBUG;
-        child[u].pb(v);
-        child[v].pb(u);
-        // DEBUG;
+    int t;
+    cin>>t;
+    while (t--){
+        cin>>n>>k>>s;
+        for (int i=0;i<k;++i){
+            for (int j=0;j<26;++j){
+                cnt[i][j]=0;
+            }
+        }
+        for (int i=0;i<n;++i){
+            // cout<<"*:"<<s[i]-'a'<<"\n";
+            cnt[i%k][s[i]-'a']++;
+        }
+        // For(i,0,k){For(j,0,2) cout<<cnt[i][j]<<" "; cout<<"\n";}
+        int ans=0;
+        for (int i=0;i<k;++i){
+            ans+=differ(i,k-1-i);
+            // cout<<"ans:"<<ans<<"\n";
+        }
+        cout<<ans/2<<"\n";
     }
-    // DEBUG; 
-    travel(1,a[1]);
-    cout<<res;
+    return 0;
 }
