@@ -4,9 +4,13 @@ using namespace std;
 #define fi first
 #define se second
 #define pb push_back
+#define pf push_front
 #define pp push
 #define et empty
 #define mp make_pair
+#define count_array(a,b,n,indx) {int fiIndx=-1; for(int iiiii=0;iiiii<n;iiiii++) if(iiiii==n-1||(a[iiiii]!=a[iiiii+1])) {b[indx++]=iiiii-fiIndx; fiIndx=iiiii;}}
+#define prefix_arr(a,b,n) {b[0]=a[0]; for(int iiiii=1;iiiii<n,iiiii++) b[iiiii]=b[iiiii-1]+a[iiiii];}
+#define suffix_arr(a,b,n) {b[n-1]=a[n-1]; for(int iiiii=n-2;iiiii>=0,iiiii--) b[iiiii]=b[iiiii+1]+a[iiiii];}
 
 #ifdef ONLINE_JUDGE
 #define CURTIME()         ;
@@ -26,6 +30,7 @@ using namespace std;
 #define Forl(i,a,b) for (ll i=a;i<b;i++)
 #define Fodl(i,b,a) for (ll i=b;i>a;i--)
 #define ForV(v) for (auto it = v.begin(); it!=v.end(); ++it)
+
 typedef int64_t ll;
 typedef uint64_t ull;
 #define prno                             cout<<"NO\n"
@@ -37,25 +42,33 @@ typedef uint64_t ull;
 #define rall(v)             (v).rbegin(), (v).rend()
 #define bit(x, i)           (((x) >> (i)) & 1)
 #define bitcount(n)         __builtin_popcountll(n)
-ll tmp,t,n,a[555],b[555];
-int main(){
+
+int n,m,a[111111],u,v,res,visit[111111];
+vector<vector<int>> child;
+
+void travel(int cur, int check){
+    visit[cur]=1;
+    if(child[cur].size()==1&&visit[child[cur][0]]) {res++; return;}
+    if(!a[cur]) check=0;
+    ForV(child[cur]) if(!visit[*it] && check+a[*it]<=m) travel(*it, check+a[*it]);
+}
+
+int main() {
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    cin>>t;
-    while(t--){
-        int poss=1; cin>>n;
-        For(i,0,n) cin>>a[i];
-        For(i,0,n) cin>>b[i];
-        if(n%2 && a[n/2]!=b[n/2]) poss = 0;
-        map<pair<ll,ll>,int> m;
-        For(i,0,n/2) {
-            m[mp(min(a[i],a[n-1-i]),max(a[i],a[n-1-i]))]++;
-        }
-        For(i,0,n/2) {
-            if(m[mp(min(b[i],b[n-1-i]),max(b[i],b[n-1-i]))]<=0) poss=0;
-            m[mp(min(b[i],b[n-1-i]),max(b[i],b[n-1-i]))]--;
-        }
-        if(poss) pryon;
+    // DEBUG;
+    cin>>n>>m;
+    child.resize(n+1);
+    For(i,1,n+1) cin>>a[i];
+    For(i,0,n-1){
+        cin>>u>>v;
+        // DEBUG;
+        child[u].pb(v);
+        child[v].pb(u);
+        // DEBUG;
     }
+    // DEBUG; 
+    travel(1,a[1]);
+    cout<<res;
 }
