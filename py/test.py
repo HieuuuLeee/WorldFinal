@@ -18,5 +18,5 @@ for _ in range(t):
 	if k % 2 == 1:
 		ans += n // k - max(cnt[k // 2])
 	print(ans)
-
+''
 # print(ord('a'))
