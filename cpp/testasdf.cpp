@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
  
 #define fi first
@@ -34,13 +34,18 @@ typedef uint64_t ull;
 #define rall(v)             (v).rbegin(), (v).rend()
 #define bit(x, i)           (((x) >> (i)) & 1)
 #define bitcount(n)         __builtin_popcountll(n)
+const int maxn=200007;
+
+// ll t,n,tmp;
+// vector<int> v;
+// vector<int> a[11111][11111];
+
+int a[10];
 
 int main(){
-    CURTIME();
-    INFILE("in.txt");
-    OUFILE("out.txt");
-    int t; cin>>t;
-    vector<int> v = {1,3,1}, u = {1,3,2};
-    vector<int> vv = v;
-    cout << vv.size();
+    a[1] = 4294967296;
+    cout<<a[0];
+    // string s = "123";
+    // cout << stoi(s);
+    return 0;
 }

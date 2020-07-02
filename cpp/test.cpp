@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
  
 #define fi first
@@ -36,44 +36,54 @@ typedef uint64_t ull;
 #define bitcount(n)         __builtin_popcountll(n)
 const int maxn=200007;
 
-int n,k,ans=0;
-int cnt[maxn][26];
-string s;
-
-int differ(int u,int v){
-    int ret=0,mx=0;
-    for (int j=0;j<26;++j){
-        ret+=cnt[u][j]+cnt[v][j];
-        mx=max(mx,cnt[u][j]+cnt[v][j]);
-    }
-    // cout<<"ret:"<<ret<<" "<<"mx:"<<mx<<"\n";
-    return ret-mx;
-}
-
+ll t,n,tmp;
+vector<int> v;
+vector<int> a[11111][11111];
 int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    int t;
-    cin>>t;
-    while (t--){
-        cin>>n>>k>>s;
-        for (int i=0;i<k;++i){
-            for (int j=0;j<26;++j){
-                cnt[i][j]=0;
+    cin>>t>>n;
+    while(t!=0){
+        For(i,0,n)
+            v.pb((cin>>tmp,tmp));
+        For(i,0,n){
+            For(j,0,t+1){
+                if(v[i]<=j){
+                    if(i==0 && v[i]!=j) continue;
+                    if(i==0 && v[i]==j) 
+                        a[i][j].pb(i+1);
+                    else if(v[i]==j && a[i-1][j].size()!=0)
+                        a[i][j].pb(i+1);
+                        if(a[i][j]>a[i-1][j])
+                        a[i][j] = a[i-1][j];
+                    else if(v[i]==j && a[i-1][j].size()==0)
+                        a[i][j].pb(i+1);
+                    else if(a[i-1][j-v[i]].size()!=0 && a[i-1][j].size()!=0)
+                        if(a[i-1][j-v[i]] < a[i-1][j])
+                            a[i][j] = a[i-1][j-v[i]];
+                        else
+                            a[i][j] = a[i-1][j];
+                    else if(a[i-1][j-v[i]].size()!=0 && a[i-1][j].size()==0)
+                        a[i][j] = a[i-1][j-v[i]];
+                    else if(i!=0) a[i][j] = a[i-1][j];
+                }
+                else if(i!=0) a[i][j] = a[i-1][j];
             }
         }
-        for (int i=0;i<n;++i){
-            // cout<<"*:"<<s[i]-'a'<<"\n";
-            cnt[i%k][s[i]-'a']++;
+        vector<int> tt;
+        while(tt.size()==0){
+            for(int i=n-1;i>=0;i--)
+                if(tt>a[i][t])
+                    tt = a[i][t];
         }
-        // For(i,0,k){For(j,0,2) cout<<cnt[i][j]<<" "; cout<<"\n";}
-        int ans=0;
-        for (int i=0;i<k;++i){
-            ans+=differ(i,k-1-i);
-            // cout<<"ans:"<<ans<<"\n";
+        ll res=0;
+        for(int i : tt){
+            res+=v[i-1];
+            cout<<v[i-1];
         }
-        cout<<ans/2<<"\n";
+        cout<<res<<"\n";
+        cin>>t>>n;      
     }
     return 0;
 }
