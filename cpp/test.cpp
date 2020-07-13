@@ -43,47 +43,7 @@ int main(){
     CURTIME();
     INFILE("in.txt");
     OUFILE("out.txt");
-    cin>>t>>n;
-    while(t!=0){
-        For(i,0,n)
-            v.pb((cin>>tmp,tmp));
-        For(i,0,n){
-            For(j,0,t+1){
-                if(v[i]<=j){
-                    if(i==0 && v[i]!=j) continue;
-                    if(i==0 && v[i]==j) 
-                        a[i][j].pb(i+1);
-                    else if(v[i]==j && a[i-1][j].size()!=0)
-                        a[i][j].pb(i+1);
-                        if(a[i][j]>a[i-1][j])
-                        a[i][j] = a[i-1][j];
-                    else if(v[i]==j && a[i-1][j].size()==0)
-                        a[i][j].pb(i+1);
-                    else if(a[i-1][j-v[i]].size()!=0 && a[i-1][j].size()!=0)
-                        if(a[i-1][j-v[i]] < a[i-1][j])
-                            a[i][j] = a[i-1][j-v[i]];
-                        else
-                            a[i][j] = a[i-1][j];
-                    else if(a[i-1][j-v[i]].size()!=0 && a[i-1][j].size()==0)
-                        a[i][j] = a[i-1][j-v[i]];
-                    else if(i!=0) a[i][j] = a[i-1][j];
-                }
-                else if(i!=0) a[i][j] = a[i-1][j];
-            }
-        }
-        vector<int> tt;
-        while(tt.size()==0){
-            for(int i=n-1;i>=0;i--)
-                if(tt>a[i][t])
-                    tt = a[i][t];
-        }
-        ll res=0;
-        for(int i : tt){
-            res+=v[i-1];
-            cout<<v[i-1];
-        }
-        cout<<res<<"\n";
-        cin>>t>>n;      
-    }
+    cin >> n;
+    cout << n;
     return 0;
 }
