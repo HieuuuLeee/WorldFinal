@@ -35,21 +35,24 @@ int query(int node, int l, int r, int ql, int qr){
 
 int main(){
 	freopen("../in.txt", "r", stdin);
-	int n,u,q;
-	cin>>n>>u>>q;
-	cout<<n<<" "<<u<<" "<<q<<"\n";
-	for(int i=0;i<n;++i) cin>>a[i];
-	build(0,0,n-1);
-	for(int i=0;i<n*2;++i) cout<<st[i]<<" "; cout<<"\n";
-	for(int i=0; i<u; ++i){
-		int x,y;
-		cin>>x>>y; cout<<x<<" "<<y<<"\n";
-		update(0, 0, n-1, x-1, y);
-	}
-	for(int i=0;i<n*2;++i) cout<<st[i]<<" "; cout<<"\n";
-	for(int i=0;i<q;++i){
-		int x,y;
-		cin>>x>>y;
-		cout<<query(0,0,n-1,x-1,y-1)<<"\n";
-	}
+	// int n,u,q;
+	// cin>>n>>u>>q;
+	// cout<<n<<" "<<u<<" "<<q<<"\n";
+	// for(int i=0;i<n;++i) cin>>a[i];
+	// build(0,0,n-1);
+	// for(int i=0;i<n*2;++i) cout<<st[i]<<" "; cout<<"\n";
+	// for(int i=0; i<u; ++i){
+	// 	int x,y;
+	// 	cin>>x>>y; cout<<x<<" "<<y<<"\n";
+	// 	update(0, 0, n-1, x-1, y);
+	// }
+	// for(int i=0;i<n*2;++i) cout<<st[i]<<" "; cout<<"\n";
+	// for(int i=0;i<q;++i){
+	// 	int x,y;
+	// 	cin>>x>>y;
+	// 	cout<<query(0,0,n-1,x-1,y-1)<<"\n";
+	// }
+	int x=3;
+	cout<<(3^2)<<"\n";
+	// cout<<x;
 }
