@@ -34,6 +34,7 @@ int query(int node, int l, int r, int ql, int qr){
 }
 
 int main(){
+	
 	freopen("../in.txt", "r", stdin);
 	int n,u,q;
 	cin>>n>>u>>q;
