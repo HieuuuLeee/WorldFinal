@@ -5,7 +5,7 @@ sys.stdin = open('in.txt','r')
 sys.stdout = open('out.txt','w')
 
 # input value
-x = input()
+x = int(input())
 x = bin(x)[0:]
 print(x)
 #output: 0b110100
