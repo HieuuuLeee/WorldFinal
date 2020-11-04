@@ -1,30 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-#ifdef ONLINE_JUDGE
-  #define CURTIME()         ;
-  #define INFILE(name)      ;
-  #define OUFILE(name)      ;
-  #define DEBUG             ;
-  #define DUMP(value)       ;
-#else
-  #define CURTIME()         cerr << el << "[TIME]: " << clock() * 1.0 / CLOCKS_PER_SEC << "s" << el
-  #define INFILE(name)      freopen(name, "r", stdin)
-  #define OUFILE(name)      freopen(name, "w", stdin)
-  #define DEBUG             cerr << "##########\nRunning on Line: " << __LINE__ << "\nIn Function: " <<   __FUNCTION__ << "\n##########\n"
-  #define DUMP(value)       cerr << "[" << (#value) << "]: " << (value) << el
-  
-#endif
-#define For(i,a,b) for (int i=a;i<b;i++)
-#define Fod(i,b,a) for (int i=b;i>a;i--)
+
+#define fi first
+#define se second
+#define pb push_back
+#define pf push_front
+#define pp push
+#define et empty
+#define mp make_pair
+
+#define For(i,a,b) for (int i=a;i<=b;i++)
+#define Fod(i,b,a) for (int i=b;i>=a;i--)
+#define Forl(i,a,b) for (ll i=a;i<=b;i++)
+#define Fodl(i,b,a) for (ll i=b;i>=a;i--)
 
 typedef int64_t ll;
 typedef uint64_t ull;
+
+#define prno                             cout<<"NO\n"
+#define pryes                            cout<<"YES\n"
+#define pryon                            pryes; else prno;
 #define brln cout << "\n";
 #define el                  "\n"
 #define all(v)              (v).begin(), (v).end()
 #define rall(v)             (v).rbegin(), (v).rend()
-#define bit(x, i)           (((x) >> (i)) & 1)
+#define prarr(a,n)            For(i,1,n)cout<<a[i]<<" "; brln;
 #define bitcount(n)         __builtin_popcountll(n)
+
+#define INFILE(name)      freopen(name, "r", stdin)
+#define OUFILE(name)      freopen(name, "w", stdout)
+#define fast              ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+const int inf = 1e6+5;
+
 // sort(arr, arr+n, greater<int>()); 
 int sum() { return 0; }
 
@@ -98,6 +106,22 @@ ll nCr(ll n, ll r){
     r *= i;
   return n/r;
 }
+
+ll NCR(int n, int r){
+    ll p = 1, k = 1;
+    if (n - r < r)
+        r = n - r;
+    if (r != 0) {
+        while (r) {
+            p *= n;    k *= r;
+            ll m = __gcd(p, k);
+            p /= m;    k /= m;
+            n--;       r--;
+        }
+    }
+    else p = 1;
+    return p;
+}
  
 inline ll mul(ll a, ll b, ll MOD = (1LL<<62)){
   return ((((a)%MOD)*((b)%MOD))%MOD);
@@ -166,18 +190,19 @@ vector<ll> factorize_hh(ll n) {
 ll n;
 int main(){
     ios_base::sync_with_stdio(0);cin.tie(0);
-    freopen("input.txt","r",stdin);
+    INFILE("../in.txt");
+    OUFILE("../out.txt");
     // cout << nCr(100000000000000000,50);
-    // cout << miller(15);
+    cout << miller(23);
     // cout << factor(510).first << factor(510).second;
     // For(i, 1, 10) cout << i << " " << (i & 1) << "\n";
     // cout << (10<<1);
-    ll a = 100000;
+    // ll a = 100000;
     // DUMP(a);
-    pre_factorize(1000000);
-    vector<ll> x = factorize(a);
-    for(auto i : x) cout << i << " "; 
+    // pre_factorize(1000000);
+    // vector<ll> x = factorize(a);
+    // for(auto i : x) cout << i << " "; 
     // vector<ll> x = factorize_hh(a);
     // for(auto i : x) cout << i << " ";
-    CURTIME();
+    // CURTIME();
 }

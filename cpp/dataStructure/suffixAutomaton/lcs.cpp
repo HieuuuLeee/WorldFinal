@@ -3,24 +3,7 @@
  Data Structure: Suffix Automaton
 */
 
-#include <stdio.h>
-#include <assert.h>
-#include <math.h>
-#include <string.h>
-#include <time.h>
-#include <iostream>
-#include <vector>
-#include <list>
-#include <string>
-#include <algorithm>
-#include <queue>
-#include <stack>
-#include <set>
-#include <map>
-#include <complex>
-#include <chrono>
-#include <random>
-#include <unordered_map>
+#include <bits/stdc++.h>
 
 #define MAX_N 250001
 #define MAX_S 1000010
@@ -58,76 +41,57 @@ inline void init_automaton()
     tot = 1;
 }
 
-inline void extend_automaton(char ch)
-{
+inline void extend_automaton(char ch){
     int cc = ch - 'a';
-    
     int tail = tot++;
     DFA[tail].len = DFA[sink].len + 1;
     for (int i=0;i<26;i++) DFA[tail].adj[i] = -1;
-    
     int curr = sink;
-    while (curr != -1 && DFA[curr].adj[cc] == -1)
-    {
+    while (curr != -1 && DFA[curr].adj[cc] == -1){
         DFA[curr].adj[cc] = tail;
         curr = DFA[curr].prev;
     }
-    
-    if (curr == -1)
-    {
+    if (curr == -1){
         DFA[tail].prev = 0;
     }
-    else
-    {
+    else{
         int nxt = DFA[curr].adj[cc];
-        if (DFA[nxt].len == DFA[curr].len + 1)
-        {
+        if (DFA[nxt].len == DFA[curr].len + 1){
             DFA[tail].prev = nxt;
         }
-        else
-        {
+        else{
             int cl = tot++;
             DFA[cl].len = DFA[curr].len + 1;
             DFA[cl].prev = DFA[nxt].prev;
             for (int i=0;i<26;i++) DFA[cl].adj[i] = DFA[nxt].adj[i];
-            
-            while (curr != -1 && DFA[curr].adj[cc] == nxt)
-            {
+            while (curr != -1 && DFA[curr].adj[cc] == nxt){
                 DFA[curr].adj[cc] = cl;
                 curr = DFA[curr].prev;
             }
-            
             DFA[tail].prev = DFA[nxt].prev = cl;
         }
     }
     sink = tail;
 }
 
-inline string lcs(string needle)
-{
+inline string lcs(string needle){
     int curr_len = 0;
     int best_len = 0, best_pos = -1;
     int st = 0;
-    
-    for (int i=0;i<needle.length();i++)
-    {
+    for (int i=0;i<needle.length();i++){
         char cc = needle[i] - 'a';
-        if (DFA[st].adj[cc] == -1)
-        {
-            while (st != -1 && DFA[st].adj[cc] == -1)
-            {
+        if (DFA[st].adj[cc] == -1){
+            while (st != -1 && DFA[st].adj[cc] == -1){
                 st = DFA[st].prev;
             }
-            if (st == -1)
-            {
+            if (st == -1){
                 st = 0, curr_len = 0;
                 continue;
             }
             curr_len = DFA[st].len;
         }
         curr_len++;
-        if (best_len < curr_len)
-        {
+        if (best_len < curr_len){
             best_len = curr_len;
             best_pos = i;
         }
@@ -136,15 +100,12 @@ inline string lcs(string needle)
     return needle.substr(best_pos - best_len + 1, best_len);
 }
 
-int main()
-{
-    string s1 = "abcd";
-    string s2 = "akbkckd";
+int main(){
+    string s1 = "abcdasdfasdf";
+    string s2 = "aaaabcd";
     
     init_automaton();
     for (int i=0;i<s1.length();i++) extend_automaton(s1[i]);
-    
     cout << lcs(s2) << endl;
-    
     return 0;
 }

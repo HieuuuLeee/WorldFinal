@@ -1,26 +1,13 @@
-a = int(input())
-b = int(input())
-s = 1
-def sumD(s):
-	ss=a
-	  while ss>=10:
-	  	su = 0
-	  	while ss>0:
-		    su+=ss%10
-		    ss//=10
-	  	ss = su
-while a<=b:
-  
-  s*=ss
-  a+=1
-  while s>=10:
-  	su = 0
-  	while s>0:
-	    su+=s%10
-	    s//=10
-  	s = su
-  # print(s)
-  if s==9:
-    break
-print(s)
+a = []
+a.append(2)
+for i in range(1,36):
+    sum,dem,cnt = 0,0,9;
+    for j in range(i):
+        cnt = 9*(10**(j//2))
+        sum += cnt
+    a.append(a[i-1]+sum)
+t = int(input())
+for i in range(t):
+    n = int(input())
+    print(a[n])
  
