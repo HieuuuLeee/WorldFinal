@@ -33,58 +33,37 @@ typedef uint64_t ull;
 
 const int inf = 1e6+5;
 ll res=0;
-void simpleSieve(ll limit, vector<ll>& prime)
-{
-    bool mark[limit + 1];
-    memset(mark, false, sizeof(mark));
- 
-    for (ll i = 2; i <= limit; ++i) 
-    {
-        if (mark[i] == false) 
-        {
-            prime.push_back(i);
-            for (ll j = i; j <= limit; j += i)
+vector<bool> segmentedSieve(long long L, long long R) {
+    // generate all primes up to sqrt(R)
+    long long lim = sqrt(R);
+    vector<bool> mark(lim + 1, false);
+    vector<long long> primes;
+    for (long long i = 2; i <= lim; ++i) {
+        if (!mark[i]) {
+            primes.emplace_back(i);
+            for (long long j = i * i; j <= lim; j += i)
                 mark[j] = true;
         }
     }
-}
-void primesInRange(ll low, ll high)
-{
-    ll limit = floor(sqrt(high)) + 1;
-    vector<ll> prime;
-    simpleSieve(limit, prime);
-    ll n = high - low + 1;
- 
-    bool mark[n + 1];
-    memset(mark, false, sizeof(mark));
- 
-    for (ll i = 0; i < prime.size(); i++) 
-    {
-         
-        ll loLim = floor(low / prime[i]) * prime[i];
-        if (loLim < low)
-            loLim += prime[i];
-        if(loLim==prime[i])
-            loLim += prime[i];
-         
-        for (ll j = loLim; j <= high; j += prime[i])
-            if(j != prime[i])
-              mark[j - low] = true;
-    }
- 
-    for (ll i = low; i <= high-2; i++)
-        if (!mark[i - low] && !mark[i+2 - low]){
-            cout<<i<<"\n";
-            res++;
-        }
-    cout<<res;
+
+    vector<bool> isPrime(R - L + 1, true);
+    for (long long i : primes)
+        for (long long j = max(i * i, (L + i - 1) / i * i); j <= R; j += i)
+            isPrime[j - L] = false;
+    if (L == 1)
+        isPrime[0] = false;
+    return isPrime;
 }
 int main()
 {
-    ll low, high;
+    ll low, high,res=0;
     // INFILE("in.txt");
     // OUFILE("out.txt");
     cin>>low>>high;
-    primesInRange(low, high);
+    vector<bool> isPrime = segmentedSieve(low, high);
+    Forl(i,low,high-2){
+        if(isPrime[i-low] && isPrime[i-low+2]) {res++;}
+    }
+    cout<<res;
     return 0;
 }

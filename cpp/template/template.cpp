@@ -153,10 +153,32 @@ void sieve(int N) {
              for(int j = i * i; j <= N; j += i)
                  isPrime[j] = false;
 }}}
+//=====================================================
+ // O((R−L+1)loglog(R)+(√R)loglog(√R)).
+vector<bool> segmentedSieve(long long L, long long R) {
+    // generate all primes up to sqrt(R)
+    long long lim = sqrt(R);
+    vector<bool> mark(lim + 1, false);
+    vector<long long> primes;
+    for (long long i = 2; i <= lim; ++i) {
+        if (!mark[i]) {
+            primes.emplace_back(i);
+            for (long long j = i * i; j <= lim; j += i)
+                mark[j] = true;
+        }
+    }
 
-ll minPrime[1000000];
+    vector<bool> isPrime(R - L + 1, true);
+    for (long long i : primes)
+        for (long long j = max(i * i, (L + i - 1) / i * i); j <= R; j += i)
+            isPrime[j - L] = false;
+    if (L == 1)
+        isPrime[0] = false;
+    return isPrime;
+}
 
 ///======================================
+ll minPrime[1000000];
 void pre_factorize(ll n){
   for (ll i = 2; i * i <= n; ++i) {
     if (minPrime[i] == 0) { //if i is prime
@@ -192,8 +214,9 @@ int main(){
     ios_base::sync_with_stdio(0);cin.tie(0);
     INFILE("../in.txt");
     OUFILE("../out.txt");
+    cout<<pow(2,5,10);
     // cout << nCr(100000000000000000,50);
-    cout << miller(23);
+    // cout << miller(23);
     // cout << factor(510).first << factor(510).second;
     // For(i, 1, 10) cout << i << " " << (i & 1) << "\n";
     // cout << (10<<1);
