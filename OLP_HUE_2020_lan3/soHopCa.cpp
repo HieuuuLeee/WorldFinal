@@ -33,58 +33,50 @@ typedef uint64_t ull;
 
 const int inf = 1e6+5;
 ll res=0;
-void simpleSieve(ll limit, vector<ll>& prime)
-{
-    bool mark[limit + 1];
-    memset(mark, false, sizeof(mark));
- 
-    for (ll i = 2; i <= limit; ++i) 
-    {
-        if (mark[i] == false) 
-        {
-            prime.push_back(i);
-            for (ll j = i; j <= limit; j += i)
-                mark[j] = true;
-        }
+pair<ll, ll> factor(ll n) {
+    ll s = 0;
+    while ((n & 1) == 0) {
+        s++;
+        n >>= 1;
     }
+    return {s, n};
 }
-void primesInRange(ll low, ll high)
-{
-    ll limit = floor(sqrt(high)) + 1;
-    vector<ll> prime;
-    simpleSieve(limit, prime);
-    ll n = high - low + 1;
- 
-    bool mark[n + 1];
-    memset(mark, false, sizeof(mark));
- 
-    for (ll i = 0; i < prime.size(); i++) 
-    {
-         
-        ll loLim = floor(low / prime[i]) * prime[i];
-        if (loLim < low)
-            loLim += prime[i];
-        if(loLim==prime[i])
-            loLim += prime[i];
-         
-        for (ll j = loLim; j <= high; j += prime[i])
-            if(j != prime[i])
-              mark[j - low] = true;
+ll pow(ll a, ll d, ll n) {
+    ll result = 1;
+    a = a % n;
+    while (d > 0) {
+        if (d & 1) result = result * a % n;
+        d >>= 1;
+        a = a * a % n;
     }
- 
-    for (ll i = low; i <= high-2; i++)
-        if (!mark[i - low] && !mark[i+2 - low]){
-            cout<<i<<"\n";
-            res++;
-        }
-    cout<<res;
+    return result;
+}
+bool test_a(ll s, ll d, ll n, ll a) {
+    if (n == a) return true;
+    ll p = pow(a, d, n);
+    if (p == 1) return true;
+    for (; s > 0; s--) {
+        if (p == n-1) return true;
+        p = p * p % n;
+    }
+    return false;
+}
+bool miller(ll n) {
+    if (n < 2) return false;
+    if ((n & 1) == 0) return n == 2;
+    ll s, d;
+    tie(s, d) = factor(n-1);
+    // return test_a(s, d, n, 2) &&  test_a(s, d, n, 3);
+    return test_a(s, d, n, 2) && test_a(s, d, n, 7) && test_a(s, d, n, 61);
 }
 int main()
 {
-    ll low, high;
+    ll low, high,res=0;
     // INFILE("in.txt");
     // OUFILE("out.txt");
     cin>>low>>high;
-    primesInRange(low, high);
+    Forl(i,low,high-2)
+    if(miller(i) && miller(i+2)) res++;
+    cout<<res;
     return 0;
 }
