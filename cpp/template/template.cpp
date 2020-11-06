@@ -211,7 +211,7 @@ vector<ll> factorize_hh(ll n) {
 
 ll n;
 int main(){
-    ios_base::sync_with_stdio(0);cin.tie(0);
+    fast;
     INFILE("../in.txt");
     OUFILE("../out.txt");
     cout<<pow(2,5,10);
