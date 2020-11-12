@@ -55,18 +55,18 @@ void permutate(int n){
 //   if (gcd_extend(n, m, &x, &y) != 1) return -1; // not exist
 //   return (x % m  + m) % m; // vì x có thể âm 
 // }
-// ull mul_inv(ull a, ull b = MOD) {
-//     ull t1 = a, t2 = b, t3;
-//     ull v1 = 1, v2 = 0, v3;
-//     while (t2 != 1) {
-//         ull x = t1 / t2;
-//         t3 = t1 - x * t2;
-//         v3 = v1 - x * v2;
-//         t1 = t2, t2 = t3;
-//         v1 = v2, v2 = v3;
-//     }
-//     return (v2 + b) % b;
-// }
+ull mul_inv(ull a, ull b = MOD) {
+    ull t1 = a, t2 = b, t3;
+    ull v1 = 1, v2 = 0, v3;
+    while (t2 != 1) {
+        ull x = t1 / t2;
+        t3 = t1 - x * t2;
+        v3 = v1 - x * v2;
+        t1 = t2, t2 = t3;
+        v1 = v2, v2 = v3;
+    }
+    return (v2 + b) % b;
+}
 int main(){
     fast;
     INFILE("../in.txt");
