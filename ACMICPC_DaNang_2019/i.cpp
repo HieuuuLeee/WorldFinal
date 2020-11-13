@@ -14,7 +14,7 @@ using namespace std;
 #define Forl(i,a,b) for (ll i=a;i<=b;++i)
 #define Fodl(i,b,a) for (ll i=b;i>=a;--i)
 
-typedef int64_t LL;
+typedef int64_t ll;
 typedef uint64_t ull;
 
 #define prno                             cout<<"NO\n"
@@ -31,20 +31,33 @@ typedef uint64_t ull;
 #define OUFILE(name)      freopen(name, "w", stdout)
 #define fast              ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
-const LL MOD = 998244353;
+const ll MOD = 1000000007;
 const int MAX = 1000005;
 
-
+long long ans;
+int a[1005],tmp;
 int main() {
-    fast;
+    // fast;
     // INFILE("../in.txt");
     // OUFILE("../out.txt");
+	
+	int n; cin>>n;
+	int len = int(log2(n));   
+	For(i,0,len){
+		int dem=0;
+		vector<int> ask;
+		For(j,1,n)
+		if(j&1<<i) {++dem; ask.pb(j);}
 
-    int n,k,T=0; cin>>k;
-    string s,ss; cin>>s>>ss;
-
-    n = s.length();
-    For(i,0,n-1)
-        if(s[i]==ss[i]) T++;
-    cout<<n-T-max(k-T,0)+min(T,k);
+		cout<<"ASK "<<dem<<" ";
+		for(auto tt:ask) cout<<tt<<" ";
+		cout<<endl;
+		For(j,1,dem){
+			cin>>tmp;
+			a[tmp]+=(1<<i);
+		}
+	}
+	cout<<"ANSWER ";
+	For(i,1,n) cout<<a[i]<<" "; cout<<endl;
+	// cout<<len;
 }

@@ -90,3 +90,4 @@ int main() {
     }
     cout<<ans;
 }
+// https://vnoi.info/wiki/translate/he/Number-Theory.md#%E1%BB%A9ng-d%E1%BB%A5ng-%C4%91%E1%BA%BFm-s%E1%BB%91-s%E1%BB%91-nguy%C3%AAn-t%E1%BB%91-c%C3%B9ng-nhau-v%E1%BB%9Bi-m%E1%BB%99t-s%E1%BB%91-cho-tr%C6%B0%E1%BB%9Bc-trong-m%E1%BB%99t-%C4%91o%E1%BA%A1n

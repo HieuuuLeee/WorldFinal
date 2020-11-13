@@ -14,7 +14,7 @@ using namespace std;
 #define Forl(i,a,b) for (ll i=a;i<=b;++i)
 #define Fodl(i,b,a) for (ll i=b;i>=a;--i)
 
-typedef int64_t LL;
+typedef int64_t ll;
 typedef uint64_t ull;
 
 #define prno                             cout<<"NO\n"
@@ -31,20 +31,46 @@ typedef uint64_t ull;
 #define OUFILE(name)      freopen(name, "w", stdout)
 #define fast              ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
-const LL MOD = 998244353;
+const ll MOD = 1000000007;
 const int MAX = 1000005;
 
+ll NCR(int n, int r){
+    ll p = 1, k = 1;
+    if (n - r < r)
+        r = n - r;
+    if (r != 0) {
+        while (r) {
+            p *= n;    k *= r;
+            ll m = __gcd(p, k);
+            p /= m;    k /= m;
+            n--;       r--;
+        }
+    }
+    else p = 1;
+    return p;
+}
 
+long long ans;
 int main() {
     fast;
     // INFILE("../in.txt");
     // OUFILE("../out.txt");
 
-    int n,k,T=0; cin>>k;
-    string s,ss; cin>>s>>ss;
-
-    n = s.length();
-    For(i,0,n-1)
-        if(s[i]==ss[i]) T++;
-    cout<<n-T-max(k-T,0)+min(T,k);
+    int t; cin>>t;
+    int r,c;
+    while(t--){
+    	ans=1;
+    	cin>>r>>c;
+    	// cout<<r<<" "<<c<<"\n";
+    	For(i,1,r){
+    		For(j,1,c){
+    			if(i==1 && j==1) ans*=18%MOD;
+    			else if((j==1&&i>1) || (i==1&&j>1)) ans*=6;
+    			else ans*=2;
+    			ans%=MOD;
+    		}
+    	}
+    	cout<<ans%MOD<<"\n";
+    }
+    // cout<<NCR(3,2);
 }
