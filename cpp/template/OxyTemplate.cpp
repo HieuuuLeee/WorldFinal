@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
 
 using namespace std;
-// using namespace __gnu_pbds;
 
 typedef long long ll;
 typedef long double ld;
@@ -27,11 +24,6 @@ const ld  prec = .000001;
 #define rep1(i, n) for (ll i = 1; i <= (ll)(n); ++i)
 #define umap unordered_map
 #define uset unordered_set
-
-// template<class TIn>
-// using indexed_set = tree<
-//         TIn, null_type, less<TIn>,
-//         rb_tree_tag, tree_order_statistics_node_update>;
 
 void fast() {
     ios::sync_with_stdio(false);
@@ -261,35 +253,35 @@ int main() {
     //file();
     fast();
 
-    // int n;
-    // while(cin >> n && n != 0) {
-    //     set<point> s;
-    //     for(int i = 0; i < n; i++) {
-    //         point p;
-    //         cin >> p.x >> p.y;
-    //         s.insert(p);
-    //     }
+    int n;
+    while(cin >> n && n != 0) {
+        set<point> s;
+        for(int i = 0; i < n; i++) {
+            point p;
+            cin >> p.x >> p.y;
+            s.insert(p);
+        }
 
-    //     vector<point> v;
-    //     for(auto i : s) {
-    //         v.pb(i);
-    //     }
+        vector<point> v;
+        for(auto i : s) {
+            v.pb(i);
+        }
 
-    //     if(v.size() > 2) {
-    //         vector<point> hull = convexhull(v);
-    //         reverse(all(hull));
-    //         cout << hull.size() << endl;
-    //         for(auto& i : hull) {
-    //             cout << i.x << " " << i.y << enld;
-    //         }
-    //     }
-    //     else {
-    //         cout << v.size() << endl;
-    //         for(auto& i : v) {
-    //             cout << i.x << " " << i.y << enld;
-    //         }
-    //     }
-    // }
+        if(v.size() > 2) {
+            vector<point> hull = convexhull(v);
+            reverse(all(hull));
+            cout << hull.size() << endl;
+            for(auto& i : hull) {
+                cout << i.x << " " << i.y << enld;
+            }
+        }
+        else {
+            cout << v.size() << endl;
+            for(auto& i : v) {
+                cout << i.x << " " << i.y << enld;
+            }
+        }
+    }
 
     point a(1,1), b(4,4), c(3,1), d(4,2);
 
