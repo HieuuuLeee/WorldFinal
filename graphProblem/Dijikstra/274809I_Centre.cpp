@@ -1,4 +1,4 @@
-// https://codeforces.com/contest/1452/problem/C
+// https://codeforces.com/group/FLVn1Sc504/contest/274809/problem/I?fbclid=IwAR2jn0-pp4dX7-nOGmY5Y-bjZB1Iwz_ZSuCxkXgSkNjKnd2RTSaXrP1wLyE
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -35,47 +35,30 @@ typedef uint64_t ull;
 const ll MOD = 1000000007;
 const int MAX = 1000005;
 
-long long ans[1000005];
-bool check(char s, char ss){
-    return ((s=='(' && ss==')') || (s=='[' && ss ==']'));
-}
+long long ans;
 int main() {
     fast;
-    INFILE("../in.txt");
-    OUFILE("../out.txt");
+    INFILE("../../in.txt");
+    OUFILE("../../out.txt");
     int t;
     cin>>t; //cout<<t;
     while(t--){
-        // cout<<"*\n";
-        string s; cin>>s;
-        stack<char> st1,st2;
-        // bool flag = false;
-        int ans = 0;
-        // st.push(s[0]);
-        // cout<<s<<"\n";
+        string s;
+        int n,k,m,h,ans=0;
+        int cnt0=0,cnt1=0;
+        cin>>n>>k>>m>>h;
+        cin>>s;
         For(i,0,s.length()-1){
-            switch (s[i]){
-                case '(':
-                    // cout<<s[i]<<"\n";
-                    st1.push(s[i]);
-                    break;
-                case '[':
-                    // cout<<s[i]<<"\n";
-                    st2.push(s[i]);
-                    break;
-                case ')':
-                    // cout<<s[i]<<"\n";
-                    if(!st1.et() && st1.top() == '(') {++ans; st1.pop();}
-                    else st1.push(s[i]);
-                    break;
-                case ']':
-                    // cout<<s[i]<<"\n";
-                    if(!st2.et() && st2.top()=='[') {++ans; st2.pop();}
-                    else st2.push(s[i]);
-                    break; 
-                default:
-                    break;   
-            }
+            if(s[i]=='1') cnt1++;
+            else cnt0++;
+        }
+        if(k>m){
+            ans+=(m*cnt1);
+            ans+=min(cnt0*k,cnt0*(h+m));
+        }
+        else{
+            ans+=(k*cnt0);
+            ans+=min(cnt1*m,cnt1*(h+k));
         }
         cout<<ans<<"\n";
     }
