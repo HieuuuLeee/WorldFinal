@@ -33,16 +33,22 @@ typedef uint64_t ull;
 #define fast              ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
 const ll MOD = 1000000007;
-const int MAX = 1000005;
-
-long long ans;
+const int MAX = 100005;
+// long long ans;
 int main() {
     fast;
-    INFILE("../../in.txt");
-    OUFILE("../../out.txt");
-    int n,m; cin>>n>>m;
-    vector<vector<pair<int,int>>> 
-    For(i,1,m){
+    // INFILE("../in.txt");
+    // OUFILE("../out.txt");
 
+    int t; cin>>t;
+    while(t--){
+    	int n; cin>>n;
+    	int ans=0;
+    	if(n==1) cout<<"0\n";
+    	else if(n==2) cout<<"1\n";
+    	else if(n==3) cout<<"2\n";
+    	else if(n%2==0) cout<<"2\n";
+    	else cout<<"3\n"; 
+    	// cout<<ans<<"\n";
     }
 }

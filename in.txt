@@ -1,3 +1,81 @@
+4
+5 2
+abcdz
+bcdzz
+4 2
+bcdz
+czzz
+4 2
+bccdz
+czzzz
+6 3
+aabbdz
+aczzzz
+4
+3 2
+abc
+bcd
+4 2
+abba
+azza
+2 1
+zz
+aa
+6 2
+aaabba
+ddddcc
+
+4
+3 3
+bcc
+bcd
+4 2
+abba
+azza
+2 1
+zz
+aa
+6 2
+aaabba
+ddddcc
+
+No
+Yes
+No
+Yes
+
+4
+5 2
+aaaab
+bbccc
+4 2
+abba
+azza
+2 1
+zz
+aa
+6 2
+aabbcc
+bbdekk
+2
+6 3
+001000
+2 4
+1 3
+3 5
+4 2
+1011
+1 4
+2 3
+
+6
+1
+2
+3
+4
+6
+1000000001
+
 4 4
 @..#
 ....

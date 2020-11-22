@@ -33,16 +33,44 @@ typedef uint64_t ull;
 #define fast              ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
 const ll MOD = 1000000007;
-const int MAX = 1000005;
-
-long long ans;
+const int MAX = 100005;
+// long long ans;
 int main() {
     fast;
-    INFILE("../../in.txt");
-    OUFILE("../../out.txt");
-    int n,m; cin>>n>>m;
-    vector<vector<pair<int,int>>> 
-    For(i,1,m){
+    // INFILE("../in.txt");
+    // OUFILE("../out.txt");
 
+    int t; cin>>t;
+    while(t--){
+    	int n,q; cin>>n>>q;
+        string s; cin>>s;
+        int one=0,zero=0;
+        bool check0[n+1],check1[n+1];
+        // cout<<s<<"\n";
+        For(i,0,n-1){
+            if(s[i]=='0'){
+                check0[i]=zero?1:0; 
+                zero++; 
+            }
+            else{
+                check0[i]=one?1:0; 
+                one=1;
+            }
+        }
+        one=zero=0;
+        Fod(i,n-1,0){
+            if(s[i]=='0'){
+                check1[i]=zero; zero=1; 
+            }
+            else{
+                check1[i]=one; one=1;
+            }
+        }
+        // For(i,0,n-1) cout<<check0[i]<<" "; brln;
+        // For(i,0,n-1) cout<<check1[i]<<" "; brln;
+        while(q--){
+            int l,r; cin>>l>>r;
+            if(check0[l-1] || check1[r-1]) pryon;
+        }
     }
 }
