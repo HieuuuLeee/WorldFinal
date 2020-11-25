@@ -1,3 +1,4 @@
+// https://codeforces.com/gym/302256/problem/A
 #include<bits/stdc++.h>
 using namespace std;
 #define For(i,a,b) for(int i=a;i<=b;i++)

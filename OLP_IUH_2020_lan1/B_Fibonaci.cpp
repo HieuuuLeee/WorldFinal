@@ -1,4 +1,3 @@
-// https://codeforces.com/group/FLVn1Sc504/contest/274809/problem/I?fbclid=IwAR2jn0-pp4dX7-nOGmY5Y-bjZB1Iwz_ZSuCxkXgSkNjKnd2RTSaXrP1wLyE
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -32,46 +31,38 @@ typedef uint64_t ull;
 #define OUFILE(name)      freopen(name, "w", stdout)
 #define fast              ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
-const ll MOD = 1000000007;
-const int MAX = 1000005;
+const ll MOD = 998244353;
+const ll MAX = 1000005;
 
-long long ans;
-map<int,int> check;
-vector<pair<int,int>> next(n+1);
-map<pair<int,int>,int> visited;
+vector<vector<ll>> res = {{0,1},{1,1}}, ma = {{0,1},{1,1}};
 
-void djik(int u,int v){
-	priority_queue<pair<int,int>> q;
-	q.pb({0,u});
-	while(!q.et()){
-		pair<int,int> cur = q.top();
-		if(cur.se==v) return;
-		for(auto i:next(cur.se)){
-			if(visited[i.fi] == 0 || visited[i.fi] < cur.fi - i.se){
-				visited[i.fi] = cur.fi - i.se;
-				q.push({visited[i.fi], i.fi});
-			}
+void mul(vector<vector<ll>> &a,vector<vector<ll>> b){
+	ll ra=2,ca=2,rb=2,cb=2;
+	vector<vector<ll>> ress = {{0,0},{0,0}};
+	For(i,0,ra-1)
+		For(j,0,ca-1){
+			For(ia,0,ca-1)
+				ress[i][j] += (a[i][ia]*b[ia][j]) % MOD;
 		}
-	}
-	cout<<"BUG!!\n";
-	return;
+	a = ress;
 }
 
-void dfs(int u,int v){
-	
+pair<ll,ll> solve(ll n){
+	while(n>0){
+		if(n&1){
+			mul(res,ma);
+		}
+		mul(ma,ma);
+		n>>=1;
+	}
+	return {res[0][0],res[0][1]};
 }
 
 int main() {
     fast;
-    INFILE("../../in.txt");
-    OUFILE("../../out.txt");
-    int n,m; cin>>n>>m;
-    For(i,1,m){
-    	int u,v,w; cin>>u>>v>>w;
-    	next[u].pb({v,w});
-    	next[v].pb({u,w});
-    }
-    djik(1,n,1);
-    dfs(1,n,-1);
-    For(i,1,n) if(check!=)
+    // INFILE("../in.txt");
+    // OUFILE("../out.txt");
+    ll n; cin>>n;
+    pair<ll,ll> ans = solve(n+1);
+    cout<<(ans.fi*ans.se)%MOD;
 }
