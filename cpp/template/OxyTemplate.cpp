@@ -223,6 +223,34 @@ vector<point> convexhull(vector<point>& X, bool onedge = false) {
     } while(start != p);
     return hull;
 }
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ll cross(const pair<ll, ll> &O, const pair<ll, ll> &A, const pair<ll, ll> &B){
+    return ((A.fi - O.fi)*(B.se - O.se) - (A.se - O.se)*(B.fi - O.fi));
+}
+ 
+vector<pair<ll, ll>> convexHull(vector<pair<ll, ll>> &points){
+    ll n = points.size();
+     if(n < 4)
+            return points;
+    ll k = 0;
+    vector<pair<ll, ll>> H(2*n);
+    sort(all(points));
+ 
+    for(ll i = 0; i < n; i++){
+            while(k > 1 && cross(H[k-2], H[k-1], points[i]) <= 0)
+                k--;
+            H[k++] = points[i];
+    }
+ 
+    for(ll i = n-1, t = k+1; i > 0; --i){
+            while(k >= t && cross(H[k-2], H[k-1], points[i-1]) <= 0)
+                k--;
+            H[k++] = points[i-1];
+    }
+    H.resize(k-1);
+    return H;
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ld polyarea(vector<point>& p) {
     ld result = 0;
